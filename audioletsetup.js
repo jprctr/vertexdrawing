@@ -31,7 +31,7 @@
     }
     
     var audioletRunner = function(outX, outY) {
-      //trying to stick this in a conditional
+      //don't add new audiolets if one already exists because it will mess everything up
       if (this.audiolet == undefined) {
         this.audiolet = new Audiolet();
       }
@@ -40,10 +40,7 @@
         function(frequency) {
           var synth = new Synth(this.audiolet, frequency);
           synth.synthSetup();
-          //console.log(synth);
-          
           synth.connect(this.audiolet.output);
-          //console.log(synth);
         }.bind(this)
       );
     };
