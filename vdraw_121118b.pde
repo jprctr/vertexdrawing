@@ -6,7 +6,7 @@ void setup(){
   smooth();
   
   //Sets the maximum number of vertices
-  maxV = 12;
+  maxV = 9;
   
   //Sets default values
   vertices = 0;
@@ -42,18 +42,14 @@ void draw(){
       //Loops through vertices
       for (int i=0; i<maxV; i++){
         //Sets color based on vertex position
-        fill(posX[1]/2,posX[i]/2,posY[i]/2,135);
-        //Sets vertex positions
-        if (posX[i]==0){
-          vertex(posX[i],posY[i]);
-        } else {
+        fill(colorR,colorG,colorB,colorA);
+          //Sets vertex positions
           vertex(posX[i],posY[i]);
           //Sets values for audio arrays
-          audioX[i] = int(map(posX[i],0,width,220,440));
-          audioY[i] = int(map(posY[i],0,height,220,440));
-        }
+          audioX[i] = int(map(posX[i],0,width,49,523.25));
+          audioY[i] = int(map(posY[i],0,height,0,5));
+        endShape();
       }
-    endShape();
   popMatrix();
   
 }    
@@ -84,5 +80,10 @@ void mouseClicked(){
   //posY[maxV-1] = posY[0];
   
   //Call some JS to synthesize audio using the frequencies set on click
-  VERTEXDRAW.audioletRun(outX, outY);
+  VERTEXDRAW.audioletRun(outX, outY, vertices);
+}
+
+void keyPressed(){
+  loop();
+  setup();
 }
