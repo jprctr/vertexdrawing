@@ -31,16 +31,19 @@
     }
     
     var audioletRunner = function(outX, outY) {
-      this.audiolet = new Audiolet();
-      var frequencyPattern = new PSequence([outX, outY], 1);
-      this.audiolet.scheduler.play([frequencyPattern], 2, 
+      //trying to stick this in a conditional
+      if (this.audiolet == undefined) {
+        this.audiolet = new Audiolet();
+      }
+      var frequencyPattern = new PSequence([outX], outY, outY);
+      this.audiolet.scheduler.play([frequencyPattern], 1, 
         function(frequency) {
           var synth = new Synth(this.audiolet, frequency);
           synth.synthSetup();
-          console.log(synth);
+          //console.log(synth);
           
           synth.connect(this.audiolet.output);
-          console.log(synth);
+          //console.log(synth);
         }.bind(this)
       );
     };
